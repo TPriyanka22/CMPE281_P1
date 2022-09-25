@@ -1,0 +1,23 @@
+{% extends 's3objects/base.html' %}
+
+{% block content %}
+    <div class="text-center">
+        <h2>Account Detail</h2>
+        <p>User Name: {{ user.username }}</p>
+        <p>First Name: {{ user.first_name }}</p>
+        <p>Last Name: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        {% for ua in sau %}
+            {% if user.id == ua.user_id %}
+                <p>Login with: {% if ua.provider == "facebook" %}
+                    {{ "Facebook" }}
+                {% elif ua.provider == "google-oauth2" %}
+                    {{ "Google" }}
+                {% endif %}</p>
+            {% endif %}
+        {% endfor %}
+        <p>Date Joined: {{ user.date_joined }}</p>
+        <p>Last Login: {{ user.last_login }}</p>
+        <p class="text-right"><a href="/">Back</a></p>
+    </div>
+{% endblock %}

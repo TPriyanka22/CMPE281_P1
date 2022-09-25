@@ -1,0 +1,48 @@
+{% extends 's3objects/base.html' %}
+
+{% block content %}
+    <h2 class="page-title text-center">Welcome,</h2>
+
+    {% if user.is_authenticated %}
+        <p class="user-name text-center">{{ user.first_name }} {{ user.last_name }}.</p>
+        <p class="text-right"><a href="{% url 'upload_file' %}">Upload a file</a></p>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Uploader FN</th>
+                        <th>Uploader LN</th>
+                        <th>Uploaded At</th>
+                        <th>Updated At</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for oneObject in object_list %}
+                        <tr>
+                            <td><a href="{{ oneObject.file.url }}" target="_blank">{{ oneObject.file.name }}</a></td>
+                            <td>{{ oneObject.owner.first_name }}</td>
+                            <td>{{ oneObject.owner.last_name }}</td>
+                            <td>{{ oneObject.uploadTime }}</td>
+                            <td>{{ oneObject.updateTime }}</td>
+                            <td>{{ oneObject.description }}</td>
+                            {% if user.is_authenticated %}
+                                {% if oneObject.owner == user %}
+                                    <td><a href="{% url 'update_file' id=oneObject.id %}">Update</a></td>
+                                {% endif %}
+                                {% if oneObject.owner == user or user.username == 'admin'%}
+                                    <td><a href="{% url 'delete_file' id=oneObject.id %}">Delete</a></td>
+                                {% endif %}
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="text-right"><a href="{% url 'upload_file' %}">Upload a file</a></p>
+        <p class="text-right"><a href="{% url 'account_detail' %}">Account Detail</a></p>
+    {% else %}
+        <h3 class="text-center">Please login first.</h3>
+    {% endif %}
+{% endblock %}

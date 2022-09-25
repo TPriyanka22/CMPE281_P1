@@ -1,0 +1,12 @@
+{% extends 's3objects/base.html' %}
+
+{% block content %}
+    <form class="text-center" action="." method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit", value="Upload" />
+    </form>
+    <form class="text-center" action="{% url 'home' %}">
+        <input type="submit", value="Cancel" />
+    </form>
+{% endblock %}

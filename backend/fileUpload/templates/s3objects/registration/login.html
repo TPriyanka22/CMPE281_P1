@@ -1,0 +1,13 @@
+{% extends 's3objects/base.html' %}
+
+{% block content %}
+    <h2 class="text-center">Login</h2>
+    {% comment %} <p class="text-center"><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></p> {% endcomment %}
+    <p class="text-center"><a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></p>
+    <form class="text-center" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p class="text-right"><a href="/">Back</a></p>
+{% endblock %}
