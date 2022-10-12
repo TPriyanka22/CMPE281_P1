@@ -113,14 +113,22 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
+if env('ENVIRONMENT') != 'development':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'database-1',
+            'USER': 'admin',
+            'PASSWORD': 'admin6969',
+            'HOST': 'database-1.cs3tp3jp049m.us-east-1.rds.amazonaws.com',
+            'PORT': '3306',
+        }
+    }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'database-1',
-        'USER': 'admin',
-        'PASSWORD': 'admin6969',
-        'HOST': 'database-1.cs3tp3jp049m.us-east-1.rds.amazonaws.com',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
