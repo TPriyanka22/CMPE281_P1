@@ -117,7 +117,7 @@ if env('ENVIRONMENT') != 'development':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'database-1',
+            'NAME': 'cmpe',
             'USER': 'admin',
             'PASSWORD': 'admin6969',
             'HOST': 'database-1.cs3tp3jp049m.us-east-1.rds.amazonaws.com',
