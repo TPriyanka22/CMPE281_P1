@@ -116,10 +116,10 @@ MEDIA_URL = '/media/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cs281db',
+        'NAME': 'database-1',
         'USER': 'admin',
-        'PASSWORD': 'Admin6969',
-        'HOST': 'cs281db.cs3tp3jp049m.us-east-1.rds.amazonaws.com',
+        'PASSWORD': 'admin6969',
+        'HOST': 'database-1.cs3tp3jp049m.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
