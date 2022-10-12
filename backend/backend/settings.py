@@ -112,10 +112,15 @@ MEDIA_URL = '/media/'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cs281db',
+        'USER': 'admin',
+        'PASSWORD': 'Admin6969',
+        'HOST': 'cs281db.cs3tp3jp049m.us-east-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
 }
 
