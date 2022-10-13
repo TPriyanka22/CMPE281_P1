@@ -1,23 +1,80 @@
 {% extends 's3objects/base.html' %}
 
 {% block content %}
-    <div class="text-center">
-        <h2>Account Detail</h2>
-        <p>User Name: {{ user.username }}</p>
-        <p>First Name: {{ user.first_name }}</p>
-        <p>Last Name: {{ user.last_name }}</p>
-        <p>Email: {{ user.email }}</p>
-        {% for ua in sau %}
-            {% if user.id == ua.user_id %}
-                <p>Login with: {% if ua.provider == "facebook" %}
-                    {{ "Facebook" }}
-                {% elif ua.provider == "google-oauth2" %}
-                    {{ "Google" }}
-                {% endif %}</p>
-            {% endif %}
-        {% endfor %}
-        <p>Date Joined: {{ user.date_joined }}</p>
-        <p>Last Login: {{ user.last_login }}</p>
-        <p class="text-right"><a href="/">Back</a></p>
+
+    <div class="container-fluid center-block">
+        <div class="main-body">
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-body center">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">First Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ user.first_name }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Last Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ user.last_name }}
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ user.first_name }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">User Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ user.username }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Date Joined</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ user.date_joined }}
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Last Login</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ user.last_login }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <a class="btn btn-info" href="/">Edit</a>
+                            <a class="btn btn-info" href="/"> Back </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 {% endblock %}
+
+
