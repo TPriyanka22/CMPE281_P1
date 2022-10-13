@@ -18,10 +18,9 @@ env = environ.Env()
 # # reading .env file
 environ.Env.read_env()
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(_file_).resolve().parent.parent
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(_file_)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -35,8 +34,30 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
+MEDIA_URL = '/media/'
 
-# Application definition
+print("ENV {}".format(env("ENVIRONMENT")))
+if env("ENVIRONMENT") == 'prod':
+    AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+    AWS_S3_CUSTOM_DOMAIN = '{}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+    AWS_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATIC_URL = "/static/"
+# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, ),
+# ]
+#
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -46,7 +67,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'fileUpload',
-    'social_django'
+    'social_django',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +79,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware', # social_django
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # social_django
 ]
 
 # socisl_django
@@ -74,15 +96,8 @@ LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "s3objects/static"),
-)
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -106,12 +121,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
-MEDIA_URL = '/media/'
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 
 
 if env('ENVIRONMENT') == 'prod':
@@ -133,8 +144,6 @@ else:
         }
     }
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -153,7 +162,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -164,12 +172,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
