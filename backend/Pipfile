@@ -23,6 +23,8 @@ social-auth-app-django = "==5.0.0"
 social-auth-core = "==4.3.0"
 sqlparse = "==0.4.3"
 urllib3 = "==1.26.12"
+django-storages = "*"
+boto3 = "*"
 
 [dev-packages]
 
