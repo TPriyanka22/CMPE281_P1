@@ -81,7 +81,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',  # social_django
 ]
-
+CSRF_TRUSTED_ORIGINS = ['https://cmpe281ctpt1.com/']
 # socisl_django
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
