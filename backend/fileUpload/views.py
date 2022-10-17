@@ -61,7 +61,7 @@ def updateFile(request, id):
 
 
 def deleteFile(request, id):
-    if request.user.is_authenticated and FileObject.objects.get(pk=id).owner == request.user:
+    if request.user.is_authenticated and (FileObject.objects.get(pk=id).owner == request.user or request.user == "admin") :
         sel_file = FileObject.objects.get(pk=id)
         if request.method == 'POST':
             sel_file.delete()
